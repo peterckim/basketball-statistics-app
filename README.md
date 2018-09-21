@@ -1,4 +1,4 @@
-# Recipe Manager
+# Basketball Statistics App
 
 The MyPark App is a Rails Application designed to help connect NBA 2K MyPark free agents find teams to join and vice versa. The application also provides an all-purpose dashboard that displays previous match stats, upcoming matches, and user messages upon login.
 
