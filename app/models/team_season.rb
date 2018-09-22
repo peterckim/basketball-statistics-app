@@ -1,2 +1,0 @@
-class TeamSeason < ApplicationRecord
-end

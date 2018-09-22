@@ -16,14 +16,15 @@ class GamesController < ApplicationController
 
         player_game_hash = Game.get_player_game_info(@game.game_url)
 
-        @player = Player.find_or_create_by(:first_name => player_game_hash[:player][:first_name], :last_name => player_game_hash[:player][:last_name])
         @game.update(player_game_hash[:game])
 
-
-        @player_game = PlayerGame.new(player_game_hash[:player_game])
-        @player_game.player_id = @player.id
-        @player_game.game_id = @game.id
-        @player_game.save
+        player_game_hash[:players].each do |player_hash|
+            player = Player.find_or_create_by(player_hash[:player])
+            player_game = PlayerGame.new(player_hash[:player_game])
+            player_game.player_id = player.id
+            player_game.game_id = @game.id
+            player_game.save
+        end
 
 
         redirect_to players_path
