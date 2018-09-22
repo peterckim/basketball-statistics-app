@@ -4,8 +4,10 @@ require 'open-uri'
 class Player < ApplicationRecord
     has_many :player_games
     has_many :player_seasons
+    has_many :player_season_projections
     has_many :games, through: :player_games
     has_many :seasons, through: :player_seasons
+    
 
     def to_s
         self.first_name + " " + self.last_name

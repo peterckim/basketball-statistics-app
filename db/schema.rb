@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_21_001529) do
+ActiveRecord::Schema.define(version: 2018_09_22_184304) do
 
   create_table "games", force: :cascade do |t|
     t.string "home"
@@ -44,6 +44,26 @@ ActiveRecord::Schema.define(version: 2018_09_21_001529) do
     t.index ["player_id"], name: "index_player_games_on_player_id"
   end
 
+  create_table "player_season_projections", force: :cascade do |t|
+    t.float "field_goal_percentage"
+    t.float "free_throw_percentage"
+    t.float "three_point_per_game"
+    t.float "points_per_pame"
+    t.float "rebounds_per_game"
+    t.float "assists_per_game"
+    t.float "steals_per_game"
+    t.float "blocks_per_game"
+    t.float "turnovers_per_game"
+    t.integer "user_id"
+    t.integer "player_id"
+    t.integer "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_player_season_projections_on_player_id"
+    t.index ["season_id"], name: "index_player_season_projections_on_season_id"
+    t.index ["user_id"], name: "index_player_season_projections_on_user_id"
+  end
+
   create_table "player_seasons", force: :cascade do |t|
     t.float "field_goal_percentage"
     t.float "free_throw_percentage"
@@ -74,6 +94,16 @@ ActiveRecord::Schema.define(version: 2018_09_21_001529) do
 
   create_table "seasons", force: :cascade do |t|
     t.integer "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "image"
+    t.string "uid"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
