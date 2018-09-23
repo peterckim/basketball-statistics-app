@@ -7,6 +7,15 @@ class Player < ApplicationRecord
     has_many :player_season_projections
     has_many :games, through: :player_games
     has_many :seasons, through: :player_seasons
+
+    validates :first_name, presence: true
+    validates :last_name, presence: true
+    validates :position, presence: true
+    validate :full_name_is_unique
+
+    def full_name_is_unique
+        # Code HERE
+    end
     
 
     def to_s
