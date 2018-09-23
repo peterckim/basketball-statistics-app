@@ -5,6 +5,90 @@ class Game < ApplicationRecord
     has_many :player_games
     has_many :players, through: :player_games
 
+    validates :home, presence: true
+    validates :away, presence: true
+    validates :date, presence: true
+    validate :home_must_be_real_nba_team
+    validate :away_must_be_real_nba_team
+
+    def home_must_be_real_nba_team
+        nba_teams = [
+            "Atlanta Hawks",
+            "Boston Celtics",
+            "Brooklyn Nets",
+            "Charlotte Hornets",
+            "Chicago Bulls",
+            "Cleveland Cavaliers",
+            "Dallas Mavericks",
+            "Denver Nuggets",
+            "Detroit Pistons",
+            "Golden State Warriors",
+            "Houston Rockets",
+            "Indiana Pacers",
+            "Los Angeles Clippers",
+            "Los Angeles Lakers",
+            "Memphis Grizzlies",
+            "Miami Heat",
+            "Milwaukee Bucks",
+            "Minnesota Timberwolves",
+            "New Orleans Pelicans",
+            "New York Knicks",
+            "Oklahoma City Thunder",
+            "Orlando Magic",
+            "Philadelphia 76ers",
+            "Phoenix Suns",
+            "Portland Trail Blazers",
+            "Sacramento Kings",
+            "San Antonio Spurs",
+            "Toronto Raptors",
+            "Utah Jazz",
+            "Washington Wizards"
+        ]
+
+        if !nba_teams.include?(home)
+            errors.add(:home, "must be a real NBA team")
+        end
+    end
+
+    def away_must_be_real_nba_team
+        nba_teams = [
+            "Atlanta Hawks",
+            "Boston Celtics",
+            "Brooklyn Nets",
+            "Charlotte Hornets",
+            "Chicago Bulls",
+            "Cleveland Cavaliers",
+            "Dallas Mavericks",
+            "Denver Nuggets",
+            "Detroit Pistons",
+            "Golden State Warriors",
+            "Houston Rockets",
+            "Indiana Pacers",
+            "Los Angeles Clippers",
+            "Los Angeles Lakers",
+            "Memphis Grizzlies",
+            "Miami Heat",
+            "Milwaukee Bucks",
+            "Minnesota Timberwolves",
+            "New Orleans Pelicans",
+            "New York Knicks",
+            "Oklahoma City Thunder",
+            "Orlando Magic",
+            "Philadelphia 76ers",
+            "Phoenix Suns",
+            "Portland Trail Blazers",
+            "Sacramento Kings",
+            "San Antonio Spurs",
+            "Toronto Raptors",
+            "Utah Jazz",
+            "Washington Wizards"
+        ]
+
+        if !nba_teams.include?(away)
+            errors.add(:away, "must be a real NBA team")
+        end
+    end
+
     def create_player_game
 
         player_game_hash = self.get_player_game_info(self.game_url)
