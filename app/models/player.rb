@@ -13,6 +13,30 @@ class Player < ApplicationRecord
         self.first_name + " " + self.last_name
     end
 
+    def find_player_season(year)
+        season = Season.find_by_year(year)
+        self.player_seasons.find {|i| i.season_id === season[0].id}
+    end
+
+    def self.scrape_and_add_player_to_database(url)
+
+        player_hash = Player.get_player_info(url)
+
+        player = Player.create(player_hash[:player])
+
+        season = Season.find_by(:year => 2018)
+
+        player_season = PlayerSeason.new(player_hash[:player_season])
+        player_season.player_id = player.id
+        player_season.season_id = season.id
+        player_season.save
+
+
+        return player
+
+
+    end
+
     def self.get_player_info(url)
         page = Nokogiri::HTML(open(url))
         playerName = page.css('h1').css('[itemprop="name"]').text.split(" ")

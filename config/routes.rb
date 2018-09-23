@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   resources :games
   resources :users
 
+  resources :seasons do
+    resources :players
+  end
+
 end

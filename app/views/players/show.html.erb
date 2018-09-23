@@ -1,7 +1,6 @@
 <h1><%= @player.to_s %></h2>
 
 <table style="width:100%">
-<% @player.player_seasons.each do |player_season| %>
     <tr>
         <th>Year</th>
         <th>FG%</th>
@@ -15,16 +14,15 @@
         <th>TOS</th>
     </tr>
     <tr>
-        <th><%= player_season.season.year %></th>
-        <td><%= player_season.field_goal_percentage %></td>
-        <td><%= player_season.free_throw_percentage %></td>
-        <td><%= player_season.three_point_per_game %></td>
-        <td><%= player_season.points_per_game %></td>
-        <td><%= player_season.rebounds_per_game %></td>
-        <td><%= player_season.assists_per_game %></td>
-        <td><%= player_season.steals_per_game %></td>
-        <td><%= player_season.blocks_per_game %></td>
-        <td><%= player_season.turnovers_per_game %></td>
+        <th><%= @player_season.season.year %></th>
+        <td><%= @player_season.field_goal_percentage %></td>
+        <td><%= @player_season.free_throw_percentage %></td>
+        <td><%= @player_season.three_point_per_game %></td>
+        <td><%= @player_season.points_per_game %></td>
+        <td><%= @player_season.rebounds_per_game %></td>
+        <td><%= @player_season.assists_per_game %></td>
+        <td><%= @player_season.steals_per_game %></td>
+        <td><%= @player_season.blocks_per_game %></td>
+        <td><%= @player_season.turnovers_per_game %></td>
     </tr>
-<% end %>
 </table>

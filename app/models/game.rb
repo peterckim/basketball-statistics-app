@@ -5,7 +5,22 @@ class Game < ApplicationRecord
     has_many :player_games
     has_many :players, through: :player_games
 
-    def self.get_player_game_info(url)
+    def create_player_game
+
+        player_game_hash = self.get_player_game_info(self.game_url)
+
+        self.update(player_game_hash[:game])
+
+        player_game_hash[:players].each do |player_hash|
+            player = Player.find_or_create_by(player_hash[:player])
+            player_game = PlayerGame.new(player_hash[:player_game])
+            player_game.player_id = player.id
+            player_game.game_id = self.id
+            player_game.save
+        end
+    end
+
+    def get_player_game_info(url)
         page = Nokogiri::HTML(open(url))
 
         gameDate = page.css('.scorebox').css('.scorebox_meta > div')[0].text
