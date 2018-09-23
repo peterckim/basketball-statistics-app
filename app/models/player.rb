@@ -11,11 +11,7 @@ class Player < ApplicationRecord
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :position, presence: true
-    validate :full_name_is_unique
-
-    def full_name_is_unique
-        # Code HERE
-    end
+    validates :position, inclusion: { in: %w(PG SG SF PF C) }
     
 
     def to_s
