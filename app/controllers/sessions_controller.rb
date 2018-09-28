@@ -15,12 +15,12 @@ class SessionsController < ApplicationController
         end
      
         session[:user_id] = @user.id
-        redirect_to players_path
+        redirect_to seasons_path
       else
         @user = User.find_by(:email => params[:email])
         if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
-          redirect_to players_path
+          redirect_to seasons_path
         else
           flash.now[:notice] = "Invalid email/password combination."
           @user = User.new

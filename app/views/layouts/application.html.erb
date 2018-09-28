@@ -6,10 +6,65 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag params[:controller] %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Basketball Statistics</a>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <% if logged_in? %>
+            <a class="nav-link" href="<%= root_path %>">Log Out</a>
+          <% else %>
+            <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
+          <% end %>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <% if logged_in? %>
+          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                    <span data-feather="home"></span>
+                    Home <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <span data-feather="zap"></span>
+                    Matches
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <span data-feather="users"></span>
+                    Teams
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <span data-feather="file-text"></span>
+                    Free Agents
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <% end %>
+
+
+        <%= yield %>
+      </div>
+    </div>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
   </body>
 </html>

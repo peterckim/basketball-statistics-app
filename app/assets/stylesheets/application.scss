@@ -1,0 +1,21 @@
+@import "bootstrap";
+
+* {
+  margin: 0;
+}
+
+body {
+  padding-top: 50px;
+}
+
+.nav-link {
+  color: #333;
+}
+
+.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link .feather {
+  color: #999;
+}
