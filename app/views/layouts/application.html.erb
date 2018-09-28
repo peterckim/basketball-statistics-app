@@ -18,8 +18,10 @@
         <li class="nav-item text-nowrap">
           <% if logged_in? %>
             <a class="nav-link" href="<%= root_path %>">Log Out</a>
-          <% else %>
+          <% elsif params[:controller] == "welcome" %>
             <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
+          <% else %>
+            <a class="nav-link" href="<%= root_path %>">Log In</a>
           <% end %>
         </li>
       </ul>
@@ -57,7 +59,7 @@
         <% end %>
 
         <div class="background-image"></div>
-        
+
         <%= yield %>
       </div>
     </div>
