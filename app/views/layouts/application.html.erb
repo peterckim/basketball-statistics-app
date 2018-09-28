@@ -17,7 +17,7 @@
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <% if logged_in? %>
-            <a class="nav-link" href="<%= root_path %>">Log Out</a>
+            <%= link_to "Log Out", {controller: "sessions", action: "destroy"}, method: "delete", :class => "nav-link" %>
           <% elsif params[:controller] == "welcome" %>
             <a class="nav-link" href="<%= new_user_path %>">Sign Up</a>
           <% else %>
@@ -30,7 +30,7 @@
     <div class="container-fluid">
       <div class="row">
         <% if logged_in? %>
-          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <nav class="col-md-2 d-none d-md-block sidebar bg-light">
             <div class="sidebar-sticky">
               <ul class="nav flex-column">
                 <li class="nav-item">
