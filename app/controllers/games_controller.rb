@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+    before_action :require_login
+
     def index
         @games = Game.all
     end
@@ -15,10 +17,6 @@ class GamesController < ApplicationController
         @game = Game.find_or_create_by(:game_url => params[:game_url])
         @game.create_player_game
         
-
-
         redirect_to players_path
-
-
     end
 end

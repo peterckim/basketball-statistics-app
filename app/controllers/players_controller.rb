@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+    before_action :require_login
+    
     def index
         @season = Season.find_by(:id => params[:season_id])
         @players = Player.all

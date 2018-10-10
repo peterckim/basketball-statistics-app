@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
     def logged_in?
         !!session[:user_id]
     end
+
+    def require_login
+        return head(:forbidden) unless session.include? :user_id
+    end
 end

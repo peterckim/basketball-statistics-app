@@ -1,4 +1,6 @@
 class SeasonsController < ApplicationController
+    before_action :require_login
+    
     def index
         @seasons = Season.all
     end

@@ -17,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 # Uses Bootstrap for frontend
-gem 'bootstrap', '~> 4.1.3'
+gem "bootstrap-sass"
 # Send data from rails to javascript
 gem 'gon'
 # jQuery in Rails
