@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: players
+#
+#   id                  :integer            not null, primary key
+#   first_name          :string     
+#   last_name           :string
+#   position            :string
+#   team                :string
+#   player_url          :string
+#   created_at          :datetime           not null
+#   updated_at          :datetime           not null
+#
+
 require 'nokogiri'
 require 'open-uri'
 
@@ -24,8 +38,9 @@ class Player < ApplicationRecord
     end
 
     def self.scrape_and_add_player_to_database(url)
+        player_service = PlayerService.new
 
-        player_hash = Player.get_player_info(url)
+        player_hash = player_service.get_player_info(url)
 
         player = Player.create(player_hash[:player])
 
@@ -36,35 +51,6 @@ class Player < ApplicationRecord
         player_season.season_id = season.id
         player_season.save
 
-
         return player
-
-
-    end
-
-    def self.get_player_info(url)
-        page = Nokogiri::HTML(open(url))
-        playerName = page.css('h1').css('[itemprop="name"]').text.split(" ")
-        player_hash = {
-            player: {
-                first_name: playerName[0],
-                last_name: playerName[1],
-                position: page.css('#per_game\.2018').css('[data-stat="pos"]').text,
-                team: page.css('#per_game\.2018').css('[data-stat="team_id"]').text
-            },
-            player_season: {
-                field_goal_percentage: page.css('#per_game\.2018').css('[data-stat="fg_pct"]').text,
-                free_throw_percentage: page.css('#per_game\.2018').css('[data-stat="ft_pct"]').text,
-                three_point_per_game: page.css('#per_game\.2018').css('[data-stat="fg3_per_g"]').text,
-                points_per_game: page.css('#per_game\.2018').css('[data-stat="pts_per_g"]').text,
-                rebounds_per_game: page.css('#per_game\.2018').css('[data-stat="trb_per_g"]').text,
-                assists_per_game: page.css('#per_game\.2018').css('[data-stat="ast_per_g"]').text,
-                steals_per_game: page.css('#per_game\.2018').css('[data-stat="stl_per_g"]').text,
-                blocks_per_game: page.css('#per_game\.2018').css('[data-stat="blk_per_g"]').text,
-                turnovers_per_game: page.css('#per_game\.2018').css('[data-stat="tov_per_g"]').text
-            }
-        }
-
-        return player_hash
     end
 end
