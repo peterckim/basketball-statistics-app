@@ -12,9 +12,6 @@
 #   updated_at          :datetime           not null
 #
 
-require 'nokogiri'
-require 'open-uri'
-
 class Player < ApplicationRecord
     has_many :player_games
     has_many :player_seasons

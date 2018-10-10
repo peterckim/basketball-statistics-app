@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 class PlayerService
     def get_player_info(url)
         page = Nokogiri::HTML(open(url))
