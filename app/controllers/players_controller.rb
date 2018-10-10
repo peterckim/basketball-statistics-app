@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: players
+#
+#   id                  :integer            not null, primary key
+#   first_name          :string     
+#   last_name           :string
+#   position            :string
+#   team                :string
+#   player_url          :string
+#   created_at          :datetime           not null
+#   updated_at          :datetime           not null
+#
+
 class PlayersController < ApplicationController
     before_action :require_login
     

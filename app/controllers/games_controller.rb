@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: games
+#
+#   id                      :integer            not null, primary key
+#   home                    :string
+#   away                    :string
+#   date                    :string
+#   home_score              :integer
+#   away_score              :integer
+#   game_url                :string
+#   created_at              :datetime           not null
+#   updated_at              :datetime           not null
+#
+
 class GamesController < ApplicationController
     before_action :require_login
 
