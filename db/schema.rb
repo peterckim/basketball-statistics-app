@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_22_184304) do
+ActiveRecord::Schema.define(version: 2018_10_14_053700) do
 
   create_table "games", force: :cascade do |t|
     t.string "home"
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2018_09_22_184304) do
     t.float "field_goal_percentage"
     t.float "free_throw_percentage"
     t.float "three_point_per_game"
-    t.float "points_per_pame"
     t.float "rebounds_per_game"
     t.float "assists_per_game"
     t.float "steals_per_game"
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_184304) do
     t.integer "season_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "points_per_game"
     t.index ["player_id"], name: "index_player_season_projections_on_player_id"
     t.index ["season_id"], name: "index_player_season_projections_on_season_id"
     t.index ["user_id"], name: "index_player_season_projections_on_user_id"

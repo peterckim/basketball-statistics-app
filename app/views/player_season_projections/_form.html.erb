@@ -1,0 +1,12 @@
+<%= form_for(projection) do |f| %>
+    <%= f.text_field :field_goal_percentage, :placeholder => "FG%" %><br>
+    <%= f.text_field :free_throw_percentage, :placeholder => "FT%" %><br>
+    <%= f.text_field :three_point_per_game, :placeholder => "3PM" %><br>
+    <%= f.text_field :points_per_game, :placeholder => "PTS" %><br>
+    <%= f.text_field :rebounds_per_game, :placeholder => "REBS" %><br>
+    <%= f.text_field :assists_per_game, :placeholder => "ASTS" %><br>
+    <%= f.text_field :steals_per_game, :placeholder => "STLS" %><br>
+    <%= f.text_field :blocks_per_game, :placeholder => "BLKS" %><br>
+    <%= f.text_field :turnovers_per_game, :placeholder => "TOS" %><br>
+    <%= f.submit "Create Projection" %>
+<% end %>

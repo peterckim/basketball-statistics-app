@@ -13,9 +13,6 @@
 #   updated_at              :datetime           not null
 #
 
-require 'nokogiri'
-require 'open-uri'
-
 class Game < ApplicationRecord
     NBA_TEAMS = [
         "Atlanta Hawks",

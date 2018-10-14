@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :players
   resources :games
   resources :users
+  resources :player_season_projections
 
   resources :seasons do
     resources :players
