@@ -20,19 +20,32 @@
 #
 
 class PlayerSeasonProjectionsController < ApplicationController
+    before_action :set_projection, only: [:edit, :update]
+
     def new
         @projection = PlayerSeasonProjection.new
     end
 
     def create
-
+        @projection = PlayerSeasonProjection.find_or_create_by(projection_params)
+        redirect_to season_players_path(2)
     end
 
     def edit
 
     end
 
-    def updated
+    def update
+        @project.update(projection_params)
+    end
 
+    private
+
+    def set_projection
+        @projection = PlayerSeasonProjection.find(params[:id])
+    end
+
+    def projection_params
+        params.require(:projection).permit(:field_goal_percentage, :free_throw_percentage, :three_point_per_game, :points_per_game, :rebounds_per_game, :assists_per_game, :steals_per_game, :blocks_per_game, :turnovers_per_game)
     end
 end

@@ -1,5 +1,39 @@
-<ul>
-<% @players.each do |player| %>
-    <li><%= link_to player.to_s, season_player_path(@season, player) %></li>
-<% end %>
-</ul>
+<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+<table>
+    <caption>NBA Players</caption>
+    <tr>
+        <th>Name</th>
+        <th>FG%</th>
+        <th>FT%</th>
+        <th>3PM</th>
+        <th>PTS</th>
+        <th>REBS</th>
+        <th>ASTS</th>
+        <th>STLS</th>
+        <th>BLKS</th>
+        <th>TOS</th>
+        <th>Graph</th>
+        
+    </tr>
+    <% @players.each do |player| %>
+        <tr>
+            <td><%= player.to_s %></td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>Placeholder</td>
+            <td>
+                <%= form_for(player) do |f| %>
+                    <%= f.check_box :graph, :class => "toggle", :checked => (true if p.graph?) %>
+                    <!--<input class="toggle" type="checkbox" <%= "checked='checked'" if p.graph? %>>-->
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

@@ -18,6 +18,36 @@ class PlayersController < ApplicationController
     def index
         @season = Season.find_by(:id => params[:season_id])
         @players = Player.all
+
+        graph = {
+            :players => [
+
+            ]
+        }
+
+        @players_to_graph.each do |p|
+            graph[:players] << {
+                name: p.to_s,
+                layup: p.layup_rating,
+                dunk: p.dunk_rating,
+                midrange: p.midrange_rating,
+                threepoint: p.threepoint_rating,
+                ballhandling: p.ball_handling_rating,
+                passing: p.passing_rating,
+                postoffense: p.post_offense_rating,
+                rebound: p.rebound_rating,
+                steal: p.steal_rating,
+                block: p.block_rating,
+                vertical: p.vertical_rating,
+                lateralquickness: p.lateral_quickness_rating,
+                speed: p.speed_rating,
+                acceleration: p.acceleration_rating,
+                strength: p.strength_rating,
+                stamina: p.stamina_rating
+            }
+        end
+
+        gon.final_graph = graph.to_json
     end
 
     def show
