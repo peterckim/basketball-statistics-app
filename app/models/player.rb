@@ -24,10 +24,8 @@ class Player < ApplicationRecord
     validates :position, presence: true
     validates :position, inclusion: { in: %w(PG SG SF PF C) }
 
-
-    scope :to_graph, -> { joins(:player_seasons).where('player_seasons.graph = ?', true) }
+    scope :to_graph, -> (season) { joins(:player_seasons).where('season_id = ? AND player_seasons.graph = ?', season.id, true) }
     
-
     def to_s
         self.first_name + " " + self.last_name
     end

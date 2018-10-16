@@ -19,7 +19,7 @@ class PlayersController < ApplicationController
         @season = Season.find_by(:id => params[:season_id])
         @players = Player.all
 
-        @players_to_graph = Player.to_graph
+        @players_to_graph = Player.to_graph(@season)
 
         graph = {
             :players => [
