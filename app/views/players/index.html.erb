@@ -37,3 +37,56 @@
         </tr>
     <% end %>
 </table>
+
+
+<!-- Graph -->
+<script>
+    var json = JSON.parse(gon.final_graph)
+
+    var player_data = new Array(json.players.length)
+
+    for (var i = 0; i < json.players.length; i++)
+    {
+        color_value_1 = (Math.floor(Math.random() * (255 - 0 + 1)) + 0);
+        color_value_2 = (Math.floor(Math.random() * (255 - 0 + 1)) + 0);
+        color_value_3 = (Math.floor(Math.random() * (255 - 0 + 1)) + 0);
+
+        player_data[i] = {
+        label: json.players[i].name,
+        data: [
+            json.players[i].fieldGoalPercentage, 
+            json.players[i].freeThrowPercentage, 
+            json.players[i].threePointPerGame, 
+            json.players[i].pointsPerGame, 
+            json.players[i].reboundsPerGame, 
+            json.players[i].assistsPerGame, 
+            json.players[i].stealsPerGame, 
+            json.players[i].blocksPerGame, 
+            json.players[i].turnoversPerGame
+        ],
+        lineTension: 0,
+        backgroundColor: 'rgba(' + color_value_1 + ', ' + color_value_2 + ', ' + color_value_3 + ', 0.3)',
+        borderColor: 'rgba(' + color_value_1 + ', ' + color_value_2 + ', ' + color_value_3 + ')',
+        borderWidth: 4,
+        pointBackgroundColor: 'rgba(' + color_value_1 + ', ' + color_value_2 + ', ' + color_value_3 + ')',
+        pointBorderColor: '#ffffff'
+        }
+    }
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+        labels: ["FG%", "FT%", "3PTM", "PTS", "REBS", "ASTS", "STLS", "BLKS", "TOS"],
+        datasets: player_data
+        },
+        options: {
+        scale: {
+            ticks: {
+                min: 0,
+                max: 100
+            }
+        }
+        }
+    });
+</script>

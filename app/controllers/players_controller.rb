@@ -19,6 +19,8 @@ class PlayersController < ApplicationController
         @season = Season.find_by(:id => params[:season_id])
         @players = Player.all
 
+        @players_to_graph = Player.to_graph
+
         graph = {
             :players => [
 
@@ -28,22 +30,15 @@ class PlayersController < ApplicationController
         @players_to_graph.each do |p|
             graph[:players] << {
                 name: p.to_s,
-                layup: p.layup_rating,
-                dunk: p.dunk_rating,
-                midrange: p.midrange_rating,
-                threepoint: p.threepoint_rating,
-                ballhandling: p.ball_handling_rating,
-                passing: p.passing_rating,
-                postoffense: p.post_offense_rating,
-                rebound: p.rebound_rating,
-                steal: p.steal_rating,
-                block: p.block_rating,
-                vertical: p.vertical_rating,
-                lateralquickness: p.lateral_quickness_rating,
-                speed: p.speed_rating,
-                acceleration: p.acceleration_rating,
-                strength: p.strength_rating,
-                stamina: p.stamina_rating
+                fieldGoalPercentage: p.field_goal_percentage,
+                freeThrowPercentage: p.free_throw_percentage,
+                threePointPerGame: p.three_point_per_game,
+                pointsPerGame: p.points_per_game,
+                reboundsPerGame: p.rebounds_per_game,
+                assistsPerGame: p.assists_per_game,
+                stealsPerGame: p.steals_per_game,
+                blocksPerGame: p.blocks_per_game,
+                turnoversPerGame: p.turnovers_per_game
             }
         end
 

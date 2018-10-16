@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_053700) do
+ActiveRecord::Schema.define(version: 2018_10_15_235526) do
 
   create_table "games", force: :cascade do |t|
     t.string "home"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_053700) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "points_per_game"
+    t.boolean "graph", default: false
     t.index ["player_id"], name: "index_player_seasons_on_player_id"
     t.index ["season_id"], name: "index_player_seasons_on_season_id"
   end
