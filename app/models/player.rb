@@ -25,8 +25,7 @@ class Player < ApplicationRecord
     validates :position, inclusion: { in: %w(PG SG SF PF C) }
 
 
-    # HAVE TO FIX THIS METHOD TO QUERY WHERE THE GIVEN SEASON AND PLAYER's PLAYER_SEASON GRAPH ATTRIBUTE IS TRUE
-    scope :to_graph, -> { where(graph: true) }
+    scope :to_graph, -> { joins(:player_seasons).where('player_seasons.graph = ?', true) }
     
 
     def to_s
