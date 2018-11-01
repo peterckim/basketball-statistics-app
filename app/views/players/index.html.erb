@@ -1,46 +1,58 @@
-<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+<div class="container">
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
-<table>
-    <caption>NBA Players</caption>
-    <tr>
-        <th>Name</th>
-        <th>FG%</th>
-        <th>FT%</th>
-        <th>3PM</th>
-        <th>PTS</th>
-        <th>REBS</th>
-        <th>ASTS</th>
-        <th>STLS</th>
-        <th>BLKS</th>
-        <th>TOS</th>
-        <th>Graph</th>
-        
-    </tr>
-    <% @players.each do |player| %>
-        <tr>
-            <td><%= player.to_s %></td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>Placeholder</td>
-            <td>
-                <%= form_for(player) do |f| %>
-                    <%= f.check_box :graph, :class => "toggle", :checked => (true if p.graph?) %>
-                    <!--<input class="toggle" type="checkbox" <%= "checked='checked'" if p.graph? %>>-->
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <caption>NBA Players</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>FG%</th>
+                    <th>FT%</th>
+                    <th>3PM</th>
+                    <th>PTS</th>
+                    <th>REBS</th>
+                    <th>ASTS</th>
+                    <th>STLS</th>
+                    <th>BLKS</th>
+                    <th>TOS</th>
+                    <th>Graph</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% @players.each do |player| %>
+                    <tr>
+                        <td><%= player.to_s %></td>
+                        <td><%= player.player_seasons.first.field_goal_percentage %></td>
+                        <td><%= player.player_seasons.first.free_throw_percentage %></td>
+                        <td><%= player.player_seasons.first.three_point_per_game %></td>
+                        <td><%= player.player_seasons.first.rebounds_per_game %></td>
+                        <td><%= player.player_seasons.first.points_per_game %></td>
+                        <td><%= player.player_seasons.first.assists_per_game %></td>
+                        <td><%= player.player_seasons.first.steals_per_game %></td>
+                        <td><%= player.player_seasons.first.blocks_per_game %></td>
+                        <td><%= player.player_seasons.first.turnovers_per_game %></td>
+                        <!-- NOT form_for(player). should be form_for(player.player_season) -->
+                        <td><button class="btn btn-success"></button></td>
+                        <% if false %>
+                            <td>
+                                <%= form_for(player) do |f| %>
+                                    <%= f.check_box :graph, :class => "toggle", :checked => (true if p.graph?) %>
+                                    <!--<input class="toggle" type="checkbox" <%= "checked='checked'" if p.graph? %>>-->
+                                <% end %>
+                            </td>
+                        <% end %>
+                    </tr>
                 <% end %>
-            </td>
-        </tr>
-    <% end %>
-</table>
+            </tbody>
+        </table>
+    </div>
 
 
 <!-- Graph -->
 <script>
+    console.log("It is working");
     var json = JSON.parse(gon.final_graph)
 
     var player_data = new Array(json.players.length)

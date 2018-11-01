@@ -6,7 +6,7 @@
   </ul>
 <% end %>
 
-<div class="signup-form-wrapper">
+<div class="container">
   <%= render partial: 'form', locals: { user: @user } %>
   <%= link_to('Sign up using Facebook!', '/auth/facebook') %>
 </div>

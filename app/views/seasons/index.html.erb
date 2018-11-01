@@ -1,5 +1,8 @@
-<ul>
-<% @seasons.each do |season| %>
-    <li><%= link_to season.year, season_path(season) %></li>
-<% end %>
-</ul>
+<div class="container">
+    <h1 class="display-3">Seasons</h1>
+    <ul class="list-group list-group-flush">
+        <% @seasons.each do |season| %>
+            <li class="list-group-item"><%= season.year - 1 %> - <%= season.year %></li>
+        <% end %>
+    </ul>
+</div>

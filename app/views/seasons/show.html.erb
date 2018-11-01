@@ -1,1 +1,4 @@
-<%= link_to "Players", season_players_path(@season) %>
+<div class="container">
+    <h1 class="display-3"><%= @season.year - 1 %> - <%= @season.year %> NBA Season</h1>
+    <%= link_to "Players", season_players_path(@season) %>
+</div>
