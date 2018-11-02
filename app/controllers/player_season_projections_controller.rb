@@ -28,7 +28,7 @@ class PlayerSeasonProjectionsController < ApplicationController
 
 	def create
 		@projection = PlayerSeasonProjection.find_or_create_by(projection_params)
-		redirect_to season_players_path(2)
+		redirect_to players_path
 	end
 
 	def edit

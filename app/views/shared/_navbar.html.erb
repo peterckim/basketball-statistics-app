@@ -18,6 +18,9 @@
         <li class="nav-item">
           <a class="nav-item nav-link <%= "active" if params[:controller] === "players" %>" href="<%= season_players_path(current_season) %>">Players</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link <%= "active" if params[:controller] === "player_season_projections" %>" href="<%= new_player_season_projection_path %>">Projections</a>
+        </li>
       </ul>
       <ul class="navbar-nav navbar-right">
         <a class="nav-item nav-link" href="<%= logout_path %>">Log Out</a>

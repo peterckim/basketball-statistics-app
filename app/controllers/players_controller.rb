@@ -20,7 +20,7 @@ class PlayersController < ApplicationController
     @players = Player.all[0...15]
         
 
-    @players_to_graph = Player.to_graph(@season)
+    @players_to_graph = Player.players_to_graph
 
     graph = {
       :players => [
@@ -31,15 +31,15 @@ class PlayersController < ApplicationController
     @players_to_graph.each do |p|
       graph[:players] << {
 				name: p.to_s,
-				fieldGoalPercentage: p.field_goal_percentage,
-				freeThrowPercentage: p.free_throw_percentage,
-				threePointPerGame: p.three_point_per_game,
-				pointsPerGame: p.points_per_game,
-				reboundsPerGame: p.rebounds_per_game,
-				assistsPerGame: p.assists_per_game,
-				stealsPerGame: p.steals_per_game,
-				blocksPerGame: p.blocks_per_game,
-				turnoversPerGame: p.turnovers_per_game
+				fieldGoalPercentage: p.player_seasons.first.field_goal_percentage,
+				freeThrowPercentage: p.player_seasons.first.free_throw_percentage,
+				threePointPerGame: p.player_seasons.first.three_point_per_game,
+				pointsPerGame: p.player_seasons.first.points_per_game,
+				reboundsPerGame: p.player_seasons.first.rebounds_per_game,
+				assistsPerGame: p.player_seasons.first.assists_per_game,
+				stealsPerGame: p.player_seasons.first.steals_per_game,
+				blocksPerGame: p.player_seasons.first.blocks_per_game,
+				turnoversPerGame: p.player_seasons.first.turnovers_per_game
       }
     end
 
@@ -60,4 +60,20 @@ class PlayersController < ApplicationController
 
 		redirect_to players_path
 	end
+
+	def update
+		@player = Player.find(params[:id])
+
+		if params[:player][:graph]
+			@player.graph = params[:player][:graph]
+		end
+
+		if params[:player][:projection]
+			@player.projection = params[:player][:projection]
+		end
+
+		@player.save
+
+		redirect_to players_path
+	end 
 end

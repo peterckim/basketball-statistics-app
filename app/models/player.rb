@@ -51,4 +51,20 @@ class Player < ApplicationRecord
 
         return player
     end
+
+    def self.players_to_graph
+        where("graph = ?", true)
+    end
+
+    def self.players_to_project
+        where("projection = ?", true)
+    end
+
+    def graph?
+        self.graph == true
+    end
+
+    def projection?
+        self.projection == true
+    end
 end

@@ -17,6 +17,7 @@
                     <th>BLKS</th>
                     <th>TOS</th>
                     <th>Graph</th>
+                    <th>Projection</th>
                     
                 </tr>
             </thead>
@@ -33,16 +34,20 @@
                         <td><%= player.player_seasons.first.steals_per_game %></td>
                         <td><%= player.player_seasons.first.blocks_per_game %></td>
                         <td><%= player.player_seasons.first.turnovers_per_game %></td>
-                        <!-- NOT form_for(player). should be form_for(player.player_season) -->
-                        <td><button class="btn btn-success"></button></td>
-                        <% if false %>
-                            <td>
+                        <td>
+                            <%= form_for(player) do |f| %>
+                                <%= f.check_box :graph, :class => "toggle", :checked => (true if player.graph?) %>
+                                <%= f.submit %>
+                            <% end %>
+                        </td>
+                        <td>
+                            <% if player.graph? %>
                                 <%= form_for(player) do |f| %>
-                                    <%= f.check_box :graph, :class => "toggle", :checked => (true if p.graph?) %>
-                                    <!--<input class="toggle" type="checkbox" <%= "checked='checked'" if p.graph? %>>-->
+                                    <%= f.check_box :projection, :class => "toggle", :checked => (true if player.projection?) %>
+                                    <%= f.submit %>
                                 <% end %>
-                            </td>
-                        <% end %>
+                            <% end %>
+                        </td>
                     </tr>
                 <% end %>
             </tbody>
@@ -52,7 +57,6 @@
 
 <!-- Graph -->
 <script>
-    console.log("It is working");
     var json = JSON.parse(gon.final_graph)
 
     var player_data = new Array(json.players.length)
@@ -87,17 +91,19 @@
 
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
-        type: 'radar',
+        type: 'line',
         data: {
         labels: ["FG%", "FT%", "3PTM", "PTS", "REBS", "ASTS", "STLS", "BLKS", "TOS"],
         datasets: player_data
         },
         options: {
-        scale: {
-            ticks: {
-                min: 0,
-                max: 100
-            }
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 40
+                }
+            }]
         }
         }
     });
