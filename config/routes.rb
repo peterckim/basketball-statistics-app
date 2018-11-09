@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :seasons do
-    resources :players
+    resources :players do 
+      resources :player_season_projections, only: [:new, :create]
+    end
   end
 
 end

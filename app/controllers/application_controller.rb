@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
 	end
 
 	def current_season
-		Season.find_by(:year => 2018)
+		Season.desc.first
 	end
 end

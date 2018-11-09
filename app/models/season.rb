@@ -14,6 +14,10 @@ class Season < ApplicationRecord
     has_many :players, through: :player_seasons
     has_many :games
     
+
+    scope :desc, -> { order(year: :desc) }
+    scope :asc, -> { order(year: :asc) }
+
     def self.find_by_year(year)
         where("year = ?", year)
     end

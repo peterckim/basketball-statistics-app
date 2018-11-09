@@ -23,4 +23,10 @@ class PlayerSeasonProjection < ApplicationRecord
     belongs_to :user
     belongs_to :player
     belongs_to :season
+
+
+    # RETURNS ARRAY OF PLAYERSEASONPROJECTIONS WHERE ASSOCIATED PLAYER HAS TRUE FOR PROJECTION
+    def self.projections_to_graph
+        joins(:player).where("projection = ?", true)
+    end
 end

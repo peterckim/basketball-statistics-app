@@ -16,11 +16,13 @@ class PlayersController < ApplicationController
   before_action :require_login
     
   def index
-    @season = Season.find_by(:id => params[:season_id])
-    @players = Player.all[0...15]
+	@season = Season.find_by(:id => params[:season_id])
+    @players = Player.asc
         
 
-    @players_to_graph = Player.players_to_graph
+	@players_to_graph = Player.players_to_graph
+	
+	@projections_to_graph = PlayerSeasonProjection.projections_to_graph
 
     graph = {
       :players => [
@@ -30,18 +32,33 @@ class PlayersController < ApplicationController
 
     @players_to_graph.each do |p|
       graph[:players] << {
-				name: p.to_s,
-				fieldGoalPercentage: p.player_seasons.first.field_goal_percentage,
-				freeThrowPercentage: p.player_seasons.first.free_throw_percentage,
-				threePointPerGame: p.player_seasons.first.three_point_per_game,
-				pointsPerGame: p.player_seasons.first.points_per_game,
-				reboundsPerGame: p.player_seasons.first.rebounds_per_game,
-				assistsPerGame: p.player_seasons.first.assists_per_game,
-				stealsPerGame: p.player_seasons.first.steals_per_game,
-				blocksPerGame: p.player_seasons.first.blocks_per_game,
-				turnoversPerGame: p.player_seasons.first.turnovers_per_game
+		name: p.to_s,
+		fieldGoalPercentage: p.player_seasons.first.field_goal_percentage,
+		freeThrowPercentage: p.player_seasons.first.free_throw_percentage,
+		threePointPerGame: p.player_seasons.first.three_point_per_game,
+		pointsPerGame: p.player_seasons.first.points_per_game,
+		reboundsPerGame: p.player_seasons.first.rebounds_per_game,
+		assistsPerGame: p.player_seasons.first.assists_per_game,
+		stealsPerGame: p.player_seasons.first.steals_per_game,
+		blocksPerGame: p.player_seasons.first.blocks_per_game,
+		turnoversPerGame: p.player_seasons.first.turnovers_per_game
       }
-    end
+	end
+	
+	@projections_to_graph.each do |projection|
+		graph[:players] << {
+			name: projection.player.projection_to_s,
+			fieldGoalPercentage: projection.field_goal_percentage,
+			freeThrowPercentage: projection.free_throw_percentage,
+			threePointPerGame: projection.three_point_per_game,
+			pointsPerGame: projection.points_per_game,
+			reboundsPerGame: projection.rebounds_per_game,
+			assistsPerGame: projection.assists_per_game,
+			stealsPerGame: projection.steals_per_game,
+			blocksPerGame: projection.blocks_per_game,
+			turnoversPerGame: projection.turnovers_per_game
+		}
+	end
 
     gon.final_graph = graph.to_json
   end
@@ -63,8 +80,13 @@ class PlayersController < ApplicationController
 
 	def update
 		@player = Player.find(params[:id])
+		season = Season.find(params[:season_id])
 
 		if params[:player][:graph]
+			if params[:player][:graph] === "0"
+				@player.projection = false
+			end
+
 			@player.graph = params[:player][:graph]
 		end
 
@@ -74,6 +96,6 @@ class PlayersController < ApplicationController
 
 		@player.save
 
-		redirect_to players_path
+		redirect_to season_players_path(season)
 	end 
 end

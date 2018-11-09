@@ -1,7 +1,12 @@
 @import "theme";
 
+body {
+  font-family: "Exo 2", sans-serif;
+}
+
 .container {
   width: 100%;
+  min-height: 100vh;
   margin-right: auto;
   margin-left: auto;
   padding-right: 15px;
@@ -31,9 +36,102 @@
 .background-img {
   min-height: 48rem;
   background: linear-gradient(
+      to right bottom,
       rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.7)
+      rgba(145, 145, 145, 0.7)
     ),
     url("basketball-background.jpg") no-repeat center center;
   background-size: cover;
+}
+
+.user__background--image {
+  height: 95vh;
+  background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(145, 145, 145, 0.7)
+    ),
+    url("basketball-background.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.user__header--text-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.user__header--primary {
+  backface-visibility: hidden;
+}
+
+.user__header--title {
+  display: block;
+  font-size: 50px;
+
+  animation: moveInFromLeft 1s ease-out;
+}
+
+@keyframes moveInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
+}
+
+.team__card {
+}
+
+.team__image {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.row {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.team_grid__header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.team_grid__header--title {
+  font-size: 4.5rem;
+}
+
+.team_grid__header--sub {
+  font-size: 20px;
+  color: #b7b7b7;
+  align-self: center;
+  justify-self: center;
+}
+
+.team__card {
+  align-self: center;
+  justify-self: center;
+}
+
+.team__text--title {
+  text-align: center;
 }

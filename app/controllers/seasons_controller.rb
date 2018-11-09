@@ -12,7 +12,7 @@ class SeasonsController < ApplicationController
 	before_action :require_login
 	
 	def index
-		@seasons = Season.all
+		@seasons = Season.asc
 	end
 
 	def show

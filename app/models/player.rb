@@ -25,9 +25,26 @@ class Player < ApplicationRecord
     validates :position, inclusion: { in: %w(PG SG SF PF C) }
 
     scope :to_graph, -> (season) { joins(:player_seasons).where('season_id = ? AND player_seasons.graph = ?', season.id, true) }
+    scope :asc, -> { order(first_name: :asc) }
     
     def to_s
         self.first_name + " " + self.last_name
+    end
+
+    def projection_to_s
+        self.first_name + " " + self.last_name + " Projection"
+    end
+
+    def correct_player_season(season)
+        PlayerSeason.find_by(:player_id => self.id, :season_id => season.id)
+    end
+
+    def has_projection(user, season)
+        if PlayerSeasonProjection.find_by(:user_id => user, :season_id => season.id, :player_id => self.id)
+            return true
+        else
+            return false
+        end
     end
 
     def find_player_season(year)

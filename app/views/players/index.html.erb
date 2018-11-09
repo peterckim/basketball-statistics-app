@@ -25,29 +25,48 @@
                 <% @players.each do |player| %>
                     <tr>
                         <td><%= player.to_s %></td>
-                        <td><%= player.player_seasons.first.field_goal_percentage %></td>
-                        <td><%= player.player_seasons.first.free_throw_percentage %></td>
-                        <td><%= player.player_seasons.first.three_point_per_game %></td>
-                        <td><%= player.player_seasons.first.rebounds_per_game %></td>
-                        <td><%= player.player_seasons.first.points_per_game %></td>
-                        <td><%= player.player_seasons.first.assists_per_game %></td>
-                        <td><%= player.player_seasons.first.steals_per_game %></td>
-                        <td><%= player.player_seasons.first.blocks_per_game %></td>
-                        <td><%= player.player_seasons.first.turnovers_per_game %></td>
-                        <td>
-                            <%= form_for(player) do |f| %>
-                                <%= f.check_box :graph, :class => "toggle", :checked => (true if player.graph?) %>
-                                <%= f.submit %>
-                            <% end %>
-                        </td>
-                        <td>
-                            <% if player.graph? %>
-                                <%= form_for(player) do |f| %>
-                                    <%= f.check_box :projection, :class => "toggle", :checked => (true if player.projection?) %>
+                        <% if player.correct_player_season(@season) %>
+                            <td><%= player.correct_player_season(@season).field_goal_percentage %></td>
+                            <td><%= player.correct_player_season(@season).free_throw_percentage %></td>
+                            <td><%= player.correct_player_season(@season).three_point_per_game %></td>
+                            <td><%= player.correct_player_season(@season).points_per_game %></td>
+                            <td><%= player.correct_player_season(@season).rebounds_per_game %></td>
+                            <td><%= player.correct_player_season(@season).assists_per_game %></td>
+                            <td><%= player.correct_player_season(@season).steals_per_game %></td>
+                            <td><%= player.correct_player_season(@season).blocks_per_game %></td>
+                            <td><%= player.correct_player_season(@season).turnovers_per_game %></td>
+                            <td>
+                                <%= form_for [@season, player] do |f| %>
+                                    <%= f.check_box :graph, :class => "toggle", :checked => (true if player.graph?) %>
                                     <%= f.submit %>
                                 <% end %>
-                            <% end %>
-                        </td>
+                            </td>
+                            <td>
+                                <% if player.graph? %>
+                                    <% if player.has_projection(current_user, @season) %>
+                                        <%= form_for [@season, player] do |f| %>
+                                            <%= f.check_box :projection, :class => "toggle", :checked => (true if player.projection?) %>
+                                            <%= f.submit %>
+                                        <% end %>
+                                    <% else %>
+                                        <%# LINK TO /players/:player_id/projections/new %>
+                                        <%= link_to "Create Projection", new_season_player_player_season_projection_path(@season.id, player.id) %>
+                                    <% end %>
+                                <% end %>
+                            </td>
+                        <% else %>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                        <% end %>
                     </tr>
                 <% end %>
             </tbody>
