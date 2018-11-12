@@ -20,4 +20,13 @@ Rails.application.routes.draw do
     end
   end
 
+  # Only Admin can update the data/
+  namespace :admin do
+    resources :players
+    resources :games
+    resources :users
+    resources :player_season_projections
+    resources :teams
+  end
+
 end
