@@ -1,0 +1,8 @@
+<div class="container">
+    <%= form_for([:admin, @player]) do |f| %>
+        <%= f.label "URL"%>
+        <%= f.text_field :player_url %>
+
+        <%= f.submit "Submit" %>
+    <% end %>
+</div>

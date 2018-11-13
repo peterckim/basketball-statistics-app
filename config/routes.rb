@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/sessions' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
-  resources :players
+  resources :players, except: [:new, :create, :edit]
   resources :games
   resources :users
   resources :player_season_projections

@@ -59,6 +59,10 @@ class Player < ApplicationRecord
 
         player = Player.create(player_hash[:player])
 
+        player.player_url = url
+
+        player.save
+
         season = Season.find_by(:year => 2018)
 
         player_season = PlayerSeason.new(player_hash[:player_season])
