@@ -14,6 +14,9 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+gem 'clockwork'
+gem "sidekiq"
+
 # Uses Bootstrap for frontend
 gem "bootstrap-sass"
 # Send data from rails to javascript
@@ -52,6 +55,8 @@ gem 'jbuilder', '~> 2.5'
 gem "bootstrap-sass"
 gem "sprockets-rails"
 gem "kaminari"
+
+gem "bootsnap"
 
 # Reduces boot times through caching; required in config/boot.rb
 
