@@ -38,8 +38,11 @@
                             <td><%= player.correct_player_season(@season).turnovers_per_game %></td>
                             <td>
                                 <%= form_for [@season, player] do |f| %>
-                                    <%= f.check_box :graph, :class => "toggle", :checked => (true if player.graph?) %>
-                                    <%= f.submit %>
+                                    <% if player.graph? %>
+                                        <%= f.button "", name: "player[graph]", value: "0", class: "graph__button-active" %>
+                                    <% else %>
+                                        <%= f.button "", name: "player[graph]", value: "1", class: "graph__button-inactive" %>
+                                    <% end %>
                                 <% end %>
                             </td>
                             <td>
@@ -73,6 +76,7 @@
             </tbody>
         </table>
     </div>
+
 
 
 <!-- Graph -->
