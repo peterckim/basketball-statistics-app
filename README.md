@@ -1,12 +1,12 @@
 # Basketball Statistics App
 
-The MyPark App is a Rails Application designed to help connect NBA 2K MyPark free agents find teams to join and vice versa. The application also provides an all-purpose dashboard that displays previous match stats, upcoming matches, and user messages upon login.
+The Basketball Statistics App is a Rails Application designed to provide fantasy basketball players a tool to compare NBA players' statistics and create stat projections. 
 
-Visit [Basketball Statistics App](#) to begin using the app. A video walkthrough is available on [here](#).
+Visit [Basketball Statistics App](https://basketball-statistics-app.herokuapp.com) to begin using the app. A video walkthrough is available on [here](#).
 
 ## Getting Started
 
-This app uses Ruby 2.3.3 and Rails 5.2.1. See deployment for notes on how to deploy the project on a live system.
+This app uses Ruby 2.5.1 and Rails 5.2.1. See deployment for notes on how to deploy the project on a live system.
 
 ### Installing
 
