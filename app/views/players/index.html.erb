@@ -49,8 +49,11 @@
                                 <% if player.graph? %>
                                     <% if player.has_projection(current_user, @season) %>
                                         <%= form_for [@season, player] do |f| %>
-                                            <%= f.check_box :projection, :class => "toggle", :checked => (true if player.projection?) %>
-                                            <%= f.submit %>
+                                            <% if player.projection? %>
+                                                <%= f.button "", name: "player[projection]", value: "0", class: "graph__button-active" %>
+                                            <% else %>
+                                                <%= f.button "", name: "player[projection]", value: "1", class: "graph__button-inactive" %>
+                                            <% end %>
                                         <% end %>
                                     <% else %>
                                         <%# LINK TO /players/:player_id/projections/new %>

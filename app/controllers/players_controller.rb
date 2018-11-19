@@ -79,7 +79,6 @@ class PlayersController < ApplicationController
 	end
 
 	def update
-		binding.pry
 		@player = Player.find(params[:id])
 		season = Season.find(params[:season_id])
 
